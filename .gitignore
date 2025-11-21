@@ -1,3 +1,10 @@
+# Frontend (Node/npm)
+node_modules
+dist
+dist-ssr
+*.local
+package-lock.json
+
 # Logs
 logs
 *.log
@@ -7,10 +14,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Backend (Python)
+venv/
+.venv/
+backend/env
+.env
+__pycache__/
+*.py[cod]
+*.sqlite3
+.pytest_cache/
+build/
+*.egg-info/
+vectorstore/
+index.faiss
+docs.pkl
 
 # Editor directories and files
 .vscode/*
@@ -22,4 +39,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-

@@ -1,6 +1,6 @@
 /**
- * API para conectar con el backend RAG (FastAPI + Ollama)
- * El proxy de Vite redirige /api/query -> http://localhost:8001/query
+ * API para conectar con el backend RAG (FastAPI)
+ * El proxy de Vite redirige /api/query -> http://localhost:8000/query
  */
 
 export async function askBot(question) {
