@@ -1,0 +1,27 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+pandas
+openpyxl
+
+# LangChain (monolítico) - usar la distribución oficial para compatibilidad
+langchain
+
+# El resto de dependencias se instalan abajo (faiss, sentence-transformers, etc.)
+
+# Vectorstores
+faiss-cpu
+
+# Embeddings
+sentence-transformers
+transformers
+
+# Para cargar archivos
+python-multipart
+
+# Cliente HTTP
+requests
+
+# Si querés Chroma también
+chromadb

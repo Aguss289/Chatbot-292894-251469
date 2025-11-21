@@ -1,0 +1,16 @@
+venv/
+.venv/
+backend/env
+.env
+__pycache__/
+*.py[cod]
+*.sqlite3
+/.vscode/
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+vectorstore/
+index.faiss
+docs.pkl
+.DS_Store
