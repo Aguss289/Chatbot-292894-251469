@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Estilos globales */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,10 +10,145 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Fondo azul oscuro minimalista */
+  @apply bg-slate-950 text-slate-100;
 }
 
 #root {
   width: 100%;
   height: 100vh;
+}
+
+/* Patrón de malla sutil en el fondo (rejilla azul muy tenue) */
+.bg-grid {
+  background-color: #020617;
+  background-image: linear-gradient(
+      to right,
+      rgba(30, 64, 175, 0.12) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(30, 64, 175, 0.12) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+}
+
+@layer components {
+  /* Tarjeta principal de chat, minimalista y sobria */
+  .chat-shell {
+    @apply relative max-w-4xl w-full mx-auto rounded-3xl border border-sky-900/40 bg-slate-950/80 backdrop-blur-2xl shadow-[0_22px_80px_rgba(15,23,42,0.95)] overflow-hidden;
+  }
+
+  /* Header minimalista en azul oscuro */
+  .chat-header {
+    @apply bg-slate-950/95 text-slate-50 shadow-[0_18px_40px_rgba(15,23,42,0.9)] border-b border-sky-900/70;
+  }
+
+  .chat-header-inner {
+    @apply max-w-4xl mx-auto flex items-center justify-between gap-3;
+  }
+
+  .chat-header-title {
+    @apply text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2 text-slate-50;
+  }
+
+  .chat-header-pill {
+    @apply inline-flex items-center gap-1 rounded-full bg-sky-900/30 px-3 py-1 text-xs font-medium text-slate-100/90 border border-sky-800/70;
+  }
+
+  /* Contenedor principal de mensajes con fondo sutil */
+  .chat-window {
+    @apply flex-1 overflow-y-auto px-4 py-4 sm:px-6 sm:py-6 space-y-3 bg-slate-950/75;
+  }
+
+  /* Animaciones de entrada de mensajes: sutiles, con ligero desenfoque */
+  @keyframes message-in-right {
+    0% {
+      opacity: 0;
+      transform: translateX(10px) translateY(4px);
+      filter: blur(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0) translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes message-in-left {
+    0% {
+      opacity: 0;
+      transform: translateX(-10px) translateY(4px);
+      filter: blur(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0) translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .animate-message-in-user {
+    animation: message-in-right 220ms ease-out;
+  }
+
+  .animate-message-in-bot {
+    animation: message-in-left 220ms ease-out;
+  }
+
+  /* Animación de entrada suave para la tarjeta completa */
+  @keyframes shell-in {
+    0% {
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+      filter: blur(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  .animate-shell-in {
+    animation: shell-in 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  /* Animación del icono del bot en el header */
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.35);
+    }
+    50% {
+      transform: scale(1.04);
+      box-shadow: 0 0 35px 0 rgba(129, 140, 248, 0.55);
+    }
+  }
+
+  .bot-orb {
+    @apply inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-sky-900/60 text-sky-300 border border-sky-700/80 shadow-[0_0_22px_rgba(37,99,235,0.6)];
+    animation: pulse-glow 3.5s ease-in-out infinite;
+  }
+
+  /* Input fijo con efecto glass */
+  .chat-input-shell {
+    @apply border-t border-sky-900/80 bg-slate-950/90 backdrop-blur-xl px-3 py-3 sm:px-4 sm:py-4 shadow-[0_-10px_40px_rgba(15,23,42,0.9)];
+  }
+
+  .chat-input {
+    @apply flex-1 px-4 py-3 rounded-2xl bg-slate-950/80 border border-slate-700 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200;
+  }
+
+  .chat-send-btn {
+    @apply inline-flex items-center justify-center gap-1 rounded-2xl px-5 py-3 text-sm font-medium text-white bg-sky-600 shadow-lg shadow-sky-900/50 hover:bg-sky-500 hover:shadow-[0_18px_40px_rgba(37,99,235,0.7)] hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-400 focus:ring-offset-slate-950 transition-all duration-200;
+  }
+
+  .chat-send-btn:disabled {
+    @apply opacity-60 cursor-not-allowed shadow-none translate-y-0;
+  }
 }
 

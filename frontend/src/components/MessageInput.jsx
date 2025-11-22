@@ -12,22 +12,23 @@ const MessageInput = ({ onSend, disabled }) => {
   };
 
   return (
-    <div className="border-t bg-white p-4 shadow-lg">
-      <form onSubmit={handleSubmit} className="flex space-x-3">
+    <div className="chat-input-shell">
+      <form onSubmit={handleSubmit} className="flex gap-2 sm:gap-3 items-end">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Escribe tu pregunta aquí..."
           disabled={disabled}
-          className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+          className="chat-input"
         />
         <button
           type="submit"
           disabled={disabled || !input.trim()}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors duration-200 font-medium"
+          className="chat-send-btn"
         >
-          Enviar
+          <span className="hidden sm:inline">Enviar</span>
+          <span className="sm:hidden">→</span>
         </button>
       </form>
     </div>

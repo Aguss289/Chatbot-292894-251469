@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import List
 import os
+import re
 from dotenv import load_dotenv
 from rag_pipeline import build_qa
 
@@ -35,6 +36,30 @@ class QueryOut(BaseModel):
 qa = None
 
 
+def is_greeting(text: str) -> bool:
+	text_clean = re.sub(r"[¡!¿?\.,;:]", "", text or "").strip().lower()
+	if not text_clean:
+		return False
+
+	greetings = [
+		"hola",
+		"buen dia",
+		"buen día",
+		"buenas",
+		"buenas tardes",
+		"buenas noches",
+		"hey",
+		"hi",
+		"hello",
+	]
+
+	# Coincidencia exacta o comienza con un saludo habitual
+	return any(
+		text_clean == g or text_clean.startswith(g + " ")
+		for g in greetings
+	)
+
+
 @app.on_event("startup")
 def startup_event():
 	global qa
@@ -44,6 +69,18 @@ def startup_event():
 @app.post("/query", response_model=QueryOut)
 def query(q: QueryIn):
 	global qa
+
+	# Respuesta especial para saludos sencillos (sin usar RAG ni datos del Excel)
+	if is_greeting(q.question):
+		return {
+			"answer": (
+				"¡Hola! Soy tu asistente de análisis de ventas. "
+				"Puedes preguntarme cosas como \"¿Cuántas ventas hubo en 2023?\" "
+				"o \"¿Cuál es el producto más vendido?\""
+			),
+			"sources": [],
+		}
+
 	if qa is None:
 		raise HTTPException(status_code=500, detail="QA pipeline no inicializado")
 
