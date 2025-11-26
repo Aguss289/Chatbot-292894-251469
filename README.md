@@ -30,7 +30,7 @@ ollama pull llama3.2
 
 Verifica que Ollama esté corriendo en segundo plano (se inicia automáticamente después de la instalación).
 
-#### Solucionar error "ollama no se reconoce"
+#### Solucionar error "ollama no se reconoce" (Solo si necesario)
 
 Si al ejecutar `ollama pull llama3.2` obtienes el error `ollama : El término 'ollama' no se reconoce como nombre de un cmdlet...`:
 
@@ -84,22 +84,7 @@ pip install -r requirements.txt
 
 ### 3. Configurar variables de entorno
 
-Copia el archivo de ejemplo y configúralo:
-
-```powershell
-copy backend\env.example backend\env
-```
-
-Edita `backend/env` con tu configuración (valores por defecto ya están listos para Ollama):
-
-```env
-DATASET_PATH=../TrabajoFinalPowerBI_v2 (1).xlsx
-VECTORSTORE_DIR=../vectorstore
-
-LLM_PROVIDER=ollama
-OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_MODEL=llama3.2
-```
+Crea un archivo .env en la carpeta de backend y pega el contenido del archivo env.example.
 
 ### 4. Generar el índice vectorial (vectorstore)
 
@@ -189,6 +174,7 @@ Una vez que la aplicación esté corriendo, puedes hacer preguntas como:
 - "¿Cuántos clientes diferentes compraron?"
 
 **Nota importante:** El dataset solo contiene información de **ventas**, **productos** (con categorías), **clientes** (con ciudades) y **fechas**. No incluye datos sobre vendedores, canales de venta, formas de pago ni locales específicos.
+La primer pregunta que le hagas al chatbot tardara mas que las proximasm, porque esta procesando el archivo por primera vez.
 
 ---
 
@@ -209,7 +195,7 @@ Luego reinicia el backend.
 ### 6. Notas
 
 - El backend usa `data_loader.py` para generar un solo documento agregado (ventas por año, mes, producto, cliente, ciudad) y lo indexa en FAISS.
-- El modelo (Ollama u OpenAI) responde siempre apoyándose en ese contexto; no hay respuestas hardcodeadas.
+- El modelo (Ollama) responde siempre apoyándose en ese contexto; no hay respuestas hardcodeadas.
 - Si cambias el Excel, vuelve a ejecutar `python embeddings_builder.py` antes de levantar el backend.
 
 ### Integrantes

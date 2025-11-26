@@ -30,4 +30,3 @@ echo.
 echo Cierra las ventanas de terminal para detener los servicios.
 echo.
 pause
-
