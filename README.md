@@ -30,6 +30,33 @@ ollama pull llama3.2
 
 Verifica que Ollama esté corriendo en segundo plano (se inicia automáticamente después de la instalación).
 
+#### Solucionar error "ollama no se reconoce"
+
+Si al ejecutar `ollama pull llama3.2` obtienes el error `ollama : El término 'ollama' no se reconoce como nombre de un cmdlet...`:
+
+1. **Ubica la carpeta de instalación de Ollama** (generalmente en `C:\Users\<TuUsuario>\AppData\Local\Programs\Ollama`)
+
+2. **Agrega Ollama al PATH del sistema:**
+   - Presiona `Win + X` y selecciona "Sistema"
+   - Click en "Configuración avanzada del sistema"
+   - Click en "Variables de entorno"
+   - En "Variables del usuario" o "Variables del sistema", click en "Nueva"
+   - Nombre de variable: `PATH`
+   - Valor de variable: `C:\Users\<TuUsuario>\AppData\Local\Programs\Ollama\bin`
+   - Click OK y cierra todos los diálogos
+
+3. **Reinicia PowerShell** - Cierra la terminal actual y abre una nueva
+
+4. **Intenta nuevamente:**
+   ```powershell
+   ollama pull llama3.2
+   ```
+
+**Alternativa rápida:** Si no quieres modificar el PATH, usa la ruta completa:
+```powershell
+C:\Users\<TuUsuario>\AppData\Local\Programs\Ollama\ollama.exe pull llama3.2
+```
+
 ---
 
 ## 🚀 Instalación (solo la primera vez)
