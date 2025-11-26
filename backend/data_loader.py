@@ -124,6 +124,7 @@ def build_documents_from_excel(path: str) -> List[dict]:
 
 if __name__ == "__main__":
 	import os
-	path = os.getenv("DATASET_PATH", "F:/ORT/8vo Semestre/SISTEMA SOPORTE DECISION/Obligatorio IA/TrabajoFinalPowerBI_v2 (1).xlsx")
+	default_path = os.path.join(os.path.dirname(__file__), "..", "TrabajoFinalPowerBI_v2 (1).xlsx")
+	path = os.getenv("DATASET_PATH", default_path)
 	docs = build_documents_from_excel(path)
 	print(f"Documentos generados: {len(docs)}")

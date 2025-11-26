@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Proyecto raíz. El frontend React vive en ./frontend y el backend en ./backend.",
   "scripts": {
-    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
     "build": "npm --prefix frontend run build",
     "preview": "npm --prefix frontend run preview"
   }

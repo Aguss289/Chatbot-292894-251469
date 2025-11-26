@@ -17,7 +17,8 @@ def test_data_loading():
     print("PRUEBA 1: Carga de datos desde Excel")
     print("="*60)
     
-    dataset_path = os.getenv("DATASET_PATH", "../TrabajoFinalPowerBI_v2 (1).xlsx")
+    default_path = os.path.join(os.path.dirname(__file__), "..", "TrabajoFinalPowerBI_v2 (1).xlsx")
+    dataset_path = os.getenv("DATASET_PATH", default_path)
     
     if not os.path.exists(dataset_path):
         print(f"❌ ERROR: Dataset no encontrado en {dataset_path}")

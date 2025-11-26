@@ -100,7 +100,10 @@ def reindex():
 	from data_loader import build_documents_from_excel
 	from embeddings_builder import compute_embeddings, build_faiss_index
 
-	path = os.getenv("DATASET_PATH", "F:/ORT/8vo Semestre/SISTEMA SOPORTE DECISION/Obligatorio IA/TrabajoFinalPowerBI_v2 (1).xlsx")
+	# Usar la ruta configurada en DATASET_PATH o, por defecto,
+	# el archivo de Excel en la raíz del proyecto.
+	default_path = os.path.join(os.path.dirname(__file__), "..", "TrabajoFinalPowerBI_v2 (1).xlsx")
+	path = os.getenv("DATASET_PATH", default_path)
 	docs = build_documents_from_excel(path)
 	embs = compute_embeddings(docs)
 	build_faiss_index(embs, docs, os.getenv("VECTORSTORE_DIR", "./vectorstore"))
